@@ -10,7 +10,6 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
-import java.net.URI;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
@@ -33,7 +32,7 @@ public class PostsResourceTortureIT {
         final var uri = Configuration.getValue("resource.uri");
         this.client = RestClientBuilder.
                 newBuilder().
-                baseUri(URI.create(uri)).
+                baseUri(uri).
                 build(PostsResourceClient.class);
 
         this.title = "torture" + System.currentTimeMillis();
@@ -51,10 +50,10 @@ public class PostsResourceTortureIT {
     }
 
     void initMetricsEndpoint() {
-        final var uri = Configuration.getValue("admin.uri");
+        final var adminUri = Configuration.getValue("admin.uri");
         this.metricsClient = RestClientBuilder.
                 newBuilder().
-                baseUri(URI.create(uri)).
+                baseUri(adminUri).
                 build(MetricsResourceClient.class);
     }
 

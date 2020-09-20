@@ -9,7 +9,6 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
-import java.net.URI;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,7 +22,7 @@ public class PostsResourceIT {
         final var uri = Configuration.getValue("resource.uri");
         this.client = RestClientBuilder.
                 newBuilder().
-                baseUri(URI.create(uri)).
+                baseUri(uri).
                 build(PostsResourceClient.class);
     }
 
