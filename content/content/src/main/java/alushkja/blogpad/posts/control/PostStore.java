@@ -121,7 +121,7 @@ public class PostStore {
         var fileName = this.normalizer.normalize(title);
         if (!this.fileExists(fileName)) {
             this.increaseNotExistingPostCounter();
-            return null;
+            throw new StorageException("Cannot fetch post: " + fileName);
         }
         try {
             var stringified = this.readString(fileName);
