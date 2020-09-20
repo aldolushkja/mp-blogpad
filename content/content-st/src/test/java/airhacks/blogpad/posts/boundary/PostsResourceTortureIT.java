@@ -1,6 +1,6 @@
 package airhacks.blogpad.posts.boundary;
 
-import airhacks.blogpad.ServerConfig;
+import airhacks.blogpad.Configuration;
 import airhacks.blogpad.metrics.boundary.MetricsResourceClient;
 import org.eclipse.microprofile.rest.client.RestClientBuilder;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,10 +30,10 @@ public class PostsResourceTortureIT {
 
     @BeforeEach
     public void init() {
-        URI uri = URI.create("http://localhost:" + ServerConfig.SERVER_PORT + "/content/resources/");
+        final var uri = Configuration.getValue("resource.uri");
         this.client = RestClientBuilder.
                 newBuilder().
-                baseUri(uri).
+                baseUri(URI.create(uri)).
                 build(PostsResourceClient.class);
 
         this.title = "torture" + System.currentTimeMillis();
@@ -51,10 +51,10 @@ public class PostsResourceTortureIT {
     }
 
     void initMetricsEndpoint() {
-        URI uri = URI.create("http://localhost:" + ServerConfig.SERVER_PORT + "/");
+        final var uri = Configuration.getValue("admin.uri");
         this.metricsClient = RestClientBuilder.
                 newBuilder().
-                baseUri(uri).
+                baseUri(URI.create(uri)).
                 build(MetricsResourceClient.class);
     }
 

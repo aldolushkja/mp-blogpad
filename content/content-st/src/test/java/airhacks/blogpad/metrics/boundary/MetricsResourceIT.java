@@ -1,6 +1,6 @@
 package airhacks.blogpad.metrics.boundary;
 
-import airhacks.blogpad.ServerConfig;
+import airhacks.blogpad.Configuration;
 import airhacks.blogpad.posts.boundary.PostsResourceIT;
 import org.eclipse.microprofile.rest.client.RestClientBuilder;
 import org.junit.jupiter.api.BeforeAll;
@@ -27,10 +27,10 @@ public class MetricsResourceIT {
 
     @BeforeEach
     public void init() {
-        URI uri = URI.create("http://localhost:" + ServerConfig.ADMIN_SERVER_PORT + "/");
+        var uri = Configuration.getValue("admin.uri");
         this.client = RestClientBuilder.
                 newBuilder().
-                baseUri(uri).
+                baseUri(URI.create(uri)).
                 build(MetricsResourceClient.class);
 
     }

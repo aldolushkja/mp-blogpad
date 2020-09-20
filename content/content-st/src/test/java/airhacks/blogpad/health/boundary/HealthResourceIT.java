@@ -1,6 +1,6 @@
 package airhacks.blogpad.health.boundary;
 
-import airhacks.blogpad.ServerConfig;
+import airhacks.blogpad.Configuration;
 import org.eclipse.microprofile.rest.client.RestClientBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,10 +15,10 @@ public class HealthResourceIT {
 
     @BeforeEach
     public void init() {
-        URI uri = URI.create("http://localhost:" + ServerConfig.ADMIN_SERVER_PORT + "/");
+        var uri = Configuration.getValue("admin.uri");
         this.client = RestClientBuilder.
                 newBuilder().
-                baseUri(uri).
+                baseUri(URI.create(uri)).
                 build(HealthResourceClient.class);
 
     }

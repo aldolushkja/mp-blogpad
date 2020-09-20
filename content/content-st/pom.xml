@@ -41,7 +41,14 @@
             <artifactId>cxf-rt-rs-mp-client</artifactId>
             <version>3.3.6</version>
             <scope>test</scope>
-        </dependency>        
+        </dependency>
+
+        <dependency>
+            <groupId>io.smallrye.config</groupId>
+            <artifactId>smallrye-config</artifactId>
+            <version>1.8.5</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>

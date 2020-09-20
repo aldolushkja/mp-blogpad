@@ -1,6 +1,6 @@
 package airhacks.blogpad.posts.boundary;
 
-import airhacks.blogpad.ServerConfig;
+import airhacks.blogpad.Configuration;
 import org.eclipse.microprofile.rest.client.RestClientBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,17 +14,16 @@ import java.net.URI;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-
 public class PostsResourceIT {
 
     private PostsResourceClient client;
 
     @BeforeEach
     public void init() {
-        URI uri = URI.create("http://localhost:" + ServerConfig.SERVER_PORT + "/content/resources/");
+        final var uri = Configuration.getValue("resource.uri");
         this.client = RestClientBuilder.
                 newBuilder().
-                baseUri(uri).
+                baseUri(URI.create(uri)).
                 build(PostsResourceClient.class);
     }
 
