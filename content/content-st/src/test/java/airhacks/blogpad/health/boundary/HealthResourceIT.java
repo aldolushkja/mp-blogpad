@@ -11,8 +11,6 @@ import java.net.URI;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HealthResourceIT {
-
-
     HealthResourceClient client;
 
     @BeforeEach
