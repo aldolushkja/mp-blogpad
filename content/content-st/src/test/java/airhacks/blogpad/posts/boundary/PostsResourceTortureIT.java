@@ -59,7 +59,8 @@ public class PostsResourceTortureIT {
 
     @Test
     public void startTorture() {
-        assumeTrue(System.getProperty("torture", null) != null);
+        final var torture = Configuration.getBooleanValue("torture");
+        assumeTrue(torture);
         List<CompletableFuture<Void>> tasks = Stream.
                 generate(this::runScenario).
                 limit(500).
