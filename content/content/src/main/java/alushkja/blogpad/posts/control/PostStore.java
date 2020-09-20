@@ -85,10 +85,6 @@ public class PostStore {
             return post;
         } catch (IOException ex) {
             throw new StorageException("Cannot save post: " + fileName, ex);
-        } catch (ConstraintViolationException ex) {
-            var errorMessage = "Invalid Post";
-            var jsonResponse = JsonbBuilder.create();
-            throw new ConstaintViolationException(jsonResponse.toJson(buildConstraintResponse(ex, errorMessage)));
         }
     }
 
