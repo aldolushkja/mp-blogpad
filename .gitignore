@@ -13,3 +13,6 @@ buildNumber.properties
 *.class
 blogpad/blogpad/target/
 
+.settings/
+.project
+.classpath
