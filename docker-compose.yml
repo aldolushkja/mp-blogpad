@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 services:
   reactor:
     build: reactor/reactor/
@@ -7,7 +7,7 @@ services:
       - "JAEGER_HOST=jaeger"
       - "CONTENT_MP_REST_URL=http://content:8080/content/resources"
     healthcheck:
-      test: ["CMD", "curl", "-f" , "http://localhost:9990/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:9990/health"]
       interval: 5s
       timeout: 1s
       retries: 3
@@ -20,7 +20,7 @@ services:
     environment:
       - "JAEGER_HOST=jaeger"
     healthcheck:
-      test: ["CMD", "curl", "-f" , "http://localhost:9990/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:9990/health"]
       interval: 5s
       timeout: 1s
       retries: 3

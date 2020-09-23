@@ -5,6 +5,11 @@ import javax.ws.rs.core.Response;
 
 public class StorageException extends WebApplicationException {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+
     public StorageException(String message, Throwable cause) {
         super(Response.status(400)
                 .header("message", message)

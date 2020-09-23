@@ -14,7 +14,7 @@ public class PingResource {
     String message;
 
     @GET
-    public String ping(){
+    public String ping() {
         return message;
     }
 
