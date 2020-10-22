@@ -40,7 +40,7 @@ public class PostStore {
     public void init() {
         this.storageDirectoryPath = Path.of(this.storageDir);
     }
-//
+
     @Produces
     @Liveness
     public HealthCheck checkPostsDirectoryExists() {

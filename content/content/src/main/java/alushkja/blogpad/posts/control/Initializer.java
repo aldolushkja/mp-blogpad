@@ -5,9 +5,8 @@ import org.eclipse.microprofile.health.HealthCheck;
 import org.eclipse.microprofile.health.HealthCheckResponse;
 import org.eclipse.microprofile.health.Liveness;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Initialized;
-import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 
@@ -19,7 +18,8 @@ public class Initializer {
     @Inject
     PostStore store;
 
-    public void installFirstPost(@Observes @Initialized(ApplicationScoped.class) Object doesnMatter) {
+    @PostConstruct
+    public void installFirstPost() {
         if (this.postExists())
             return;
         var initialPost = this.createInitialPost();
