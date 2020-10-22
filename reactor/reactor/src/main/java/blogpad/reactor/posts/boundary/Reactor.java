@@ -25,4 +25,8 @@ public class Reactor {
         return "rendered" + response.readEntity(JsonValue.class);
     }
 
+    String render(String template, String input){
+//        Context context =
+    }
+
 }
