@@ -1,12 +1,30 @@
 package blogpad.reactor.posts.control;
 
 import org.graalvm.polyglot.Context;
+import org.graalvm.polyglot.Source;
+
+import javax.annotation.PostConstruct;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 
 public class Renderer {
+
+    Source handlebars;
+
+    @PostConstruct
+    public void init() {
+        try {
+            this.handlebars = Source.newBuilder("js", this.loadHandlebars(), "Handlebars").build();
+        } catch (IOException e) {
+            throw new IllegalStateException("cannot load handlebars", e);
+        }
+    }
 
     String render(String templateContent, String postContent) {
         try (Context context = Context.create("js")) {
             var bindings = context.getBindings("js");
+            context.eval(this.handlebars);
             bindings.putMember("templateContent", templateContent);
             bindings.putMember("postContent", postContent);
             return context.eval("js", this.getRenderLogic()).asString();
@@ -17,5 +35,10 @@ public class Renderer {
         return """
                 templateContent +  postContent + 12
                 """;
+    }
+
+    Reader loadHandlebars() {
+        var stream = Thread.currentThread().getContextClassLoader().getResourceAsStream("js/handlebars-v4.7.6.js");
+        return new InputStreamReader(stream);
     }
 }
