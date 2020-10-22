@@ -1,8 +1,9 @@
 package blogpad.reactor.posts.control;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RendererTest {
 
@@ -15,9 +16,9 @@ class RendererTest {
 
     @Test
     public void render() {
-        var actual = this.cut.render("template", "input");
+        var actual = this.cut.render("template-", "post");
         System.out.println(" -- " + actual);
-        Assertions.assertEquals("duke42", actual);
+        assertEquals("template-post12", actual);
     }
 
 }
