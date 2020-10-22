@@ -1,16 +1,16 @@
-package blogpad.reactor.posts.boundary;
+package blogpad.reactor.posts.control;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ReactorTest {
+class RendererTest {
 
-    private Reactor cut;
+    private Renderer cut;
 
     @BeforeEach
     public void init() {
-        this.cut = new Reactor();
+        this.cut = new Renderer();
     }
 
     @Test
