@@ -12,14 +12,10 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.json.bind.JsonbBuilder;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import javax.ws.rs.BadRequestException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 
 public class PostStore {
 
@@ -145,15 +141,4 @@ public class PostStore {
         return Files.readString(path);
     }
 
-    public ConstraintResponse buildConstraintResponse(ConstraintViolationException violationExceptionSet, String errorMessage) {
-        List<ConstraitError> errors = new ArrayList<>();
-        for (ConstraintViolation<?> violations : violationExceptionSet.getConstraintViolations()) {
-            var propertyPath = violations.getPropertyPath().toString();
-            var message = violations.getMessage();
-            var constraintType = violations.getConstraintDescriptor().getAttributes().toString();
-            var invalidValue = violations.getInvalidValue().toString();
-            errors.add(new ConstraitError(propertyPath, message, constraintType, invalidValue));
-        }
-        return new ConstraintResponse(errorMessage, errors);
-    }
 }
