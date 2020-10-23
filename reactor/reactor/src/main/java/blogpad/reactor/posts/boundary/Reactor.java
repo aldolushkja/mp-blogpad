@@ -2,6 +2,7 @@ package blogpad.reactor.posts.boundary;
 
 import blogpad.reactor.posts.control.PostsResourceClient;
 import blogpad.reactor.posts.control.Renderer;
+import org.eclipse.microprofile.faulttolerance.Fallback;
 import org.eclipse.microprofile.metrics.MetricRegistry;
 import org.eclipse.microprofile.metrics.annotation.RegistryType;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
@@ -21,6 +22,7 @@ public class Reactor {
     @Inject
     Renderer renderer;
 
+    @Fallback(fallbackMethod = "getFallbackContent")
     public String render(String title) {
         var response = this.client.findPost(title);
         var status = response.getStatus();
@@ -37,6 +39,20 @@ public class Reactor {
                     </body>
                 </html>
                 """, postAsString);
+    }
+
+    public String getFallbackContent(String title) {
+        return """
+                <html>
+                    <head>
+                        <title>Error</title>
+                    </head>
+                    <body>
+                        <h1>Error :-(</h1>
+                        <article>Error rendering post with title: %s<article>
+                    </body>
+                </html>
+                """.formatted(title);
     }
 
 }
