@@ -1,5 +1,6 @@
 package blogpad.reactor.posts.boundary;
 
+import org.eclipse.microprofile.metrics.annotation.ConcurrentGauge;
 import org.eclipse.microprofile.opentracing.Traced;
 
 import javax.inject.Inject;
@@ -17,6 +18,7 @@ public class PostsResource {
 
     @GET
     @Traced
+    @ConcurrentGauge
     @Path("{title}")
     @Produces(MediaType.TEXT_HTML)
     public String findPost(@PathParam("title") String title) {
