@@ -80,6 +80,7 @@ public class PostStore {
             write(fileName, stringified);
             return post;
         } catch (IOException ex) {
+            ex.printStackTrace();
             throw new StorageException("Cannot save post: " + fileName, ex);
         }
     }

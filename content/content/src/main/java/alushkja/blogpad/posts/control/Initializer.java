@@ -20,8 +20,8 @@ public class Initializer {
 
     @PostConstruct
     public void installFirstPost() {
-        if (this.postExists())
-            return;
+//        if (this.postExists())
+//            return;
         var initialPost = this.createInitialPost();
         this.store.createNew(initialPost);
     }
